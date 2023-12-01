@@ -36,7 +36,7 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
             yk = F(hk) - F(xk) + a*sk
             σk = dot(yk-sk,F(newx))/norm(newx)^2
             σk = min(1,abs(σk))
-            τk=1+σk*dot(F(newx),d0)/dot(d0,yk)
+            τk = 1+σk*dot(F(newx),d0)/dot(d0,yk)
             βk = norm(F(newx))^2/dot(d0,yk) # Alteração do algoritmo proposto
             d0 = -τk*F(newx) + σk*βk*d0
             
