@@ -25,7 +25,7 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
         end
     end
 
-    if norm(F(xk + αk*d0)) == 0
+    if norm(F(xk + αk*d0)) < ϵ
         return k, xk, F(xk), norm(F(xk))
     else
         vk = dot(F(xk + αk*d0),-αk*d0)/norm(F(xk + αk*d0))^2
