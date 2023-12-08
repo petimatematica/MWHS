@@ -1,5 +1,10 @@
-using LinearAlgebra, Plots
+# O seguinte algoritmo é dado pelo artigo intitulado "A Scaled Dai–Yuan Projection-Based Conjugate Gradient Method for Solving Monotone Equations with Applications" 
+# A projeção que irá ser usada irá depender do conjunto viável.
 
+
+
+
+using LinearAlgebra, Plots
 function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_min = 1, λ_max = 1)
     k = 0
     xk = x
@@ -11,7 +16,7 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
         return k, xk, F(xk), norm(F(xk))
     end
 
-    if dot(-F(xk + αk*d0),d0) ≥ g*αk*norm(F(xk + αk*d0))*norm(d0)^2
+    if dot(-F(xk + αk*d0),d0) > g*αk*norm(F(xk + αk*d0))*norm(d0)^2
         if c > 1
             while dot(-F(xk + αk*d0),d0) ≥ g*αk*norm(F(xk + αk*d0))*norm(d0)^2
                 αk = αk*c 
@@ -37,12 +42,12 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
             σk = dot(yk-sk,F(newx))/norm(newx)^2
             σk = min(1,abs(σk))
             τk = 1+σk*dot(F(newx),d0)/dot(d0,yk)
-            βk = norm(F(newx))^2/dot(d0,yk) # Alteração do algoritmo proposto
+            βk = norm(F(newx))^2/dot(d0,yk) # Alteração do algoritmo proposto, pois o βk estava escrito de outra forma.
             d0 = -τk*F(newx) + σk*βk*d0
             
             αk = b
 
-            if dot(-F(newx + αk*d0),d0) ≥ g*αk*norm(F(newx + αk*d0))*norm(d0)^2
+            if dot(-F(newx + αk*d0),d0) > g*αk*norm(F(newx + αk*d0))*norm(d0)^2
                 if c > 1
                     while dot(-F(newx + αk*d0),d0) ≥ g*αk*norm(F(newx + αk*d0))*norm(d0)^2
                         αk = αk*c 
