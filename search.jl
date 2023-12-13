@@ -10,7 +10,7 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
     xk = x
     newx = x
     αk = b
-    if norm(F(xk)) > ϵ # Alteração de: norm(F(xk)) > c
+    if norm(F(xk)) > ϵ 
         d0 = -F(xk)  
     else
         return k, xk, F(xk), norm(F(xk))
@@ -35,7 +35,7 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
     k = k + 1
 
     while true
-        if norm(F(xk)) > ϵ # Alteração de: norm(F(xk)) > c
+        if norm(F(xk)) > ϵ 
             hk = xk + αk*d0
             sk = hk-xk
             yk = F(hk) - F(xk) + a*sk
