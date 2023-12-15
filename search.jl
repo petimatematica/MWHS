@@ -16,9 +16,9 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
         return k, xk, F(xk), norm(F(xk))
     end
 
-    if dot(-F(xk + αk*d0),d0) > g*αk*norm(F(xk + αk*d0))*norm(d0)^2
+    if dot(-F(xk + αk*d0)',d0) > g*αk*norm(F(xk + αk*d0))*norm(d0)^2
         if c > 1
-            while dot(-F(xk + αk*d0),d0) ≥ g*αk*norm(F(xk + αk*d0))*norm(d0)^2
+            while dot(-F(xk + αk*d0)',d0) ≥ g*αk*norm(F(xk + αk*d0))*norm(d0)^2
                 αk = αk*c 
             end
             αk = αk/c
@@ -28,7 +28,7 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
     if norm(F(xk + αk*d0)) < ϵ
         return k, xk, F(xk), norm(F(xk))
     else
-        vk = dot(F(xk + αk*d0),-αk*d0)/norm(F(xk + αk*d0))^2
+        vk = dot(F(xk + αk*d0)',-αk*d0)/norm(F(xk + αk*d0))^2
         newx = proj(xk-vk*F(xk + αk*d0))
     end
 
@@ -47,9 +47,9 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
             
             αk = b
 
-            if dot(-F(newx + αk*d0),d0) > g*αk*norm(F(newx + αk*d0))*norm(d0)^2
+            if dot(-F(newx + αk*d0)',d0) > g*αk*norm(F(newx + αk*d0))*norm(d0)^2
                 if c > 1
-                    while dot(-F(newx + αk*d0),d0) ≥ g*αk*norm(F(newx + αk*d0))*norm(d0)^2
+                    while dot(-F(newx + αk*d0)',d0) ≥ g*αk*norm(F(newx + αk*d0))*norm(d0)^2
                         αk = αk*c 
                     end
                     αk = αk/c
@@ -59,7 +59,7 @@ function CG_DY(x, F, proj; a = 0.1, g = 0.0001, c = 0.99, b = 1, ϵ = 1.e-9, λ_
             if norm(F(newx + αk*d0)) == 0
                 return k, newx, F(newx), norm(F(newx))
             else
-                vk = dot(F(newx + αk*d0),-αk*d0)/norm(F(newx + αk*d0))^2
+                vk = dot(F(newx + αk*d0)',-αk*d0)/norm(F(newx + αk*d0))^2
                 xk = newx
                 newx = proj(newx-vk*F(newx + αk*d0))
             end
