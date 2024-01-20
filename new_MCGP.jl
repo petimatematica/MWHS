@@ -7,13 +7,20 @@ function CG_DY(x, F; ϵ, σ,β)
     xk = x
     newx = x
     # αk = b
-    f = F(x)
-
-
+    Fx= F(x)
+    fx = 1/2 * norm(Fx)^2
+    
     if norm(F(xk)) > ϵ
         if k == 0
             dk = -F(xk) # Alteração, pois no artigo não mostra quem é d0 .  
-          else  
+          else 
+            yk = mewFk - Fk
+            sk = newx-xk
+            uk = sk
+            pk = 2*(fk-newfk) + sk'*(Fk-newFk) 
+            e = 0.8
+            m = 0.8
+            n = -0.1
         end 
         else
         return k, xk, F(xk), norm(F(xk))
