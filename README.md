@@ -1,5 +1,2 @@
-# SDYCG
-<<<<<<< HEAD
-=======
-#Colocar datas de atualização
->>>>>>> af9753bd8e24e443e491e8830502140f3bd39a11
+#SDYCG
+O seguinte algoritmo é dado pelo artigo intitulado "Descent Perry conjugate gradient methods for systems of monotone nonlinear equations"
