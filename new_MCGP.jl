@@ -1,3 +1,6 @@
+#  O seguinte algoritmo é dado pelo artigo intitulado "A Scaled Dai–Yuan Projection-Based Conjugate Gradient Method for Solving Monotone Equations with Applications"  
+
+
 using LinearAlgebra, Plots
 function CG_DY(x, F; ϵ, σ,β)
     k = 0
@@ -10,10 +13,9 @@ function CG_DY(x, F; ϵ, σ,β)
     if norm(F(xk)) > ϵ
         if k == 0
             dk = -F(xk) # Alteração, pois no artigo não mostra quem é d0 .  
-        else
-            
+          else  
         end 
-    else
+        else
         return k, xk, F(xk), norm(F(xk))
     end 
 
