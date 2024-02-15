@@ -33,7 +33,7 @@ function algorithm1(F)
         norm_F_z = norm(F_z,2)
 
         if norm_F_z < epsilon
-            return z
+            return z,1
         end
 
         x_km1 = x
