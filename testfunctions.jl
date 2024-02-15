@@ -3,7 +3,7 @@
 #             F_i(x) = e^{x_i} + x{i-1} -1, i= 2,3,...,n-1, and  Ω = R_+^n
  
 
-function probI(x)
+function prob1(x)
     v = Float64[]
     push!(v,exp(x[1])-1)
     for i in 2:length(x)
@@ -13,12 +13,32 @@ function probI(x)
 end
 
 
-#
-function projI(x)
+#Problem 1
+
+function prob2(x)
     v = Float64[]
-    for i in 1:length(x)
-        push!(v, max(0,x[i]))
+    for i in 2:length(x)
+        push!(v, log10(x[i]+1)- (x[i]/i))   
     end
     return v
 end
+
+#Problem 2
+
+function prob3(x)
+    v = Float64[]
+    for i in 1:length(x)
+        push!(v, 2*x[1]- sin(abs(x[1])))   
+    end
+    return v 
+end
+
+
+# function projI(x)
+#     v = Float64[]
+#     for i in 1:length(x)
+#         push!(v, max(0,x[i]))
+#     end
+#     return v
+# end
 
