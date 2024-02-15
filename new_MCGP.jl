@@ -8,6 +8,7 @@ function merito(x,F)
 end
 
 function CG_DYP(x, F; ϵ= 1.e-10, σ=1.e-4,β=0.6,m=0.8,n=-0.1, xu=0.8)
+    
     k = 0
     xk = x          # xk means x_{k-1} in the article
     newx = x        # newx means x_k in the article

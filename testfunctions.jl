@@ -28,7 +28,7 @@ end
 function prob3(x)
     v = Float64[]
     for i in 1:length(x)
-        push!(v, 2*x[1]- sin(abs(x[1])))   
+        push!(v, 2*x[i]- sin(abs(x[i])))   
     end
     return v 
 end
