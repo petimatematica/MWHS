@@ -1,9 +1,9 @@
-# 
+# Problems to numerical results
 
 
 #Problem 1
 
-function prob2(x)
+function prob1(x)
     v = Float64[]
     for i in 2:length(x)
         push!(v, log10(x[i]+1)- (x[i]/i))   
@@ -13,13 +13,17 @@ end
 
 #Problem 2
 
-function prob3(x)
+function prob2(x)
     v = Float64[]
     for i in 1:length(x)
         push!(v, 2*x[i]- sin(abs(x[i])))   
     end
     return v 
 end
+
+#Problem 3
+
+
 
 
 # function projI(x)

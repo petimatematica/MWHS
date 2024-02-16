@@ -5,7 +5,7 @@ using LinearAlgebra
 
 include("algo1.jl")
 # Dimension seting
-n = 3
+n = 2000
 
 # Objective function
 function prob2(x)
