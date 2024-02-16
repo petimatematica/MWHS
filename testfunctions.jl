@@ -1,16 +1,4 @@
-#Primeiro problema para teste dado por : 
-# Problem I - F_1 (x)= e^{x_1} - 1, 
-#             F_i(x) = e^{x_i} + x{i-1} -1, i= 2,3,...,n-1, and  Ω = R_+^n
- 
-
-function prob1(x)
-    v = Float64[]
-    push!(v,exp(x[1])-1)
-    for i in 2:length(x)
-        push!(v, exp(x[i])+x[i-1]-1)
-    end
-    return v
-end
+# 
 
 
 #Problem 1
@@ -42,3 +30,16 @@ end
 #     return v
 # end
 
+#Primeiro problema para teste dado por : 
+# Problem I - F_1 (x)= e^{x_1} - 1, 
+#             F_i(x) = e^{x_i} + x{i-1} -1, i= 2,3,...,n-1, and  Ω = R_+^n
+ 
+
+# function prob1(x)
+#     v = Float64[]
+#     push!(v,exp(x[1])-1)
+#     for i in 2:length(x)
+#         push!(v, exp(x[i])+x[i-1]-1)
+#     end
+#     return v
+# end
