@@ -1,10 +1,14 @@
 function algorithm1(F)
     iter = 0
     x = copy(x0)
+   F_km1 = NaN
+   x_km1 = NaN
+   d = NaN
     while true
         Fx = F(x)
         norm_Fx = norm(Fx,2)
 
+        println("iter $iter  norm_Fx $norm_Fx")
         if norm_Fx < epsilon
             return x,0
         end
@@ -15,13 +19,15 @@ function algorithm1(F)
         else
             y = Fx - F_km1
             s = x - x_km1
-            f_k = merit(x)
-            f_km1 = merit(x_km1)
+            f_k = merit(x,F)
+            f_km1 = merit(x_km1,F)
             zeta = 2.0*(f_km1 - f_k)+dot(s,F_km1 + Fx)
             mu = s
             w = y + xi * max(zeta,0.0) / dot(d,mu) * mu
-            t = Parei aqui
-            d = -Fx + ( dot())
+            stw = dot(s,w)
+            t = m_star * norm(w,2)^2 / stw - n_star * stw / norm(s,2)
+            dtw = dot(d,w)
+            d = -Fx + dot(w-t*s,Fx) / dtw * d
         end
 
         # Linesearch
@@ -33,19 +39,20 @@ function algorithm1(F)
         norm_F_z = norm(F_z,2)
 
         if norm_F_z < epsilon
-            return z,1
+            return z,2
         end
 
         x_km1 = x
         
         x = x - dot(F_z,x-z) / norm_F_z^2 * F_z
 
+        F_km1 = Fx
+
         iter += 1
         if iter > maxiter
             return x,1
         end
         
-        F_km1 = Fx
     end
 
 end
@@ -69,7 +76,7 @@ function linesearch(x,d,F)
 
 end
 
-function merit(x)
+function merit(x,F)
 
     return 0.5 * norm(F(x))^2
 

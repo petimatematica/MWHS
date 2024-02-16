@@ -24,7 +24,9 @@ maxiter = 1000
 epsilon = 1.e-8
 sigma = 0.75
 beta = 0.5
-xi = 1.5
+xi = 0.8
+m_star = 0.8
+n_star = -0.1
 sol = algorithm1(prob2)
 
 
