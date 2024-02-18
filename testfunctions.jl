@@ -6,7 +6,7 @@
 function prob1(x)
     v = Float64[]
     for i in 2:length(x)
-        push!(v, log10(x[i]+1)- (x[i]/i))   
+        push!(v, log10(x[i]+1)- (x[i]/n))   
     end
     return v
 end

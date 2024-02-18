@@ -5,9 +5,21 @@ using LinearAlgebra
 
 include("algo1.jl")
 # Dimension seting
-n = 2000
+n = 200
 
-# Objective function
+# Objective function 
+
+#Problem 1
+function prob1(x)
+    v = Float64[]
+    for i in 2:length(x)
+        push!(v, log10(x[i]+1)- (x[i]/n))   
+    end
+    return v
+end
+
+
+#Problem 2
 function prob2(x)
     v = Float64[]
     for i in 1 : n
