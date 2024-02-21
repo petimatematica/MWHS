@@ -1,56 +1,88 @@
 #  O seguinte algoritmo é dado pelo artigo intitulado "A Scaled Dai–Yuan Projection-Based Conjugate Gradient Method for Solving Monotone Equations with Applications"  
 
 
-using LinearAlgebra
+#####
 
-function merito(x,F)
-    return  0.5* norm(Fx)^2
-end
-
-function CG_DYP(x, F; ϵ= 1.e-10, σ=1.e-4,β=0.6,m=0.8,n=-0.1, xu=0.8)
-    
-    k = 0
-    xk = x          # xk means x_{k-1} in the article
-    newx = x        # newx means x_k in the article
-    # αk = b
-    α= β
-    Fx= F(x)
-    newFx= Fx
-    sk = newx-xk
-    uk = sk
-    # tk1= m *()
+function algorithm1(F, x0)
+    iter = 0
+    x = x0
+   F_km1 = NaN
+   x_km1 = NaN
+   d = NaN
     while true
-        if norm(F(xk)) > ϵ
-            if k == 0
-                dk = -F(xk) # Alteração, pois no artigo não mostra quem é d0 .  
-            else 
-                sk = newx-xk
-                uk = sk
-                yk = newFx - Fx
-                pk = 2*(merito(xk,F)-merito(newx,F)) + sk'*(Fk+newFk) 
-                wk = yk+ (xu * max(pk, 0)/ norm(sk)^2)*uk
-                tk1 = m * (norm(wk)^2 / sk'*wk) - n * (sk'*wk / norm(sk)^2)
-                dk = - Fk + ((wk-tk1*sk)'*Fk / dk'*wk)*dk
-                if norm(dk) > ϵ
-                    while -F(xk + α*dk)'*dk < σ* α* norm(dk)^2
-                        α = α*β
-                    end 
-                    zk= xk+ αk*dk
-                    if norm(zk) > ϵ
-                        xk = newx
-                        newx = newx - (F(zk)'*(newx - zk)/ norm(zk)^2)* F(zk)
-                        k= k+1
-                    else 
-                        return k, xk, F(xk), norm(F(xk))     
-                    end
-                         
-                else 
-                    return k, xk, F(xk), norm(F(xk))   
-                end
-            end 
-        else  
-            return k, xk, F(xk), norm(F(xk)) 
+        Fx = F(x)
+        norm_Fx = norm(Fx,2)
+
+        println("iter $iter  norm_Fx $norm_Fx")
+        if norm_Fx < epsilon
+            return x,0
         end
-    end  
+       
+        # Descent direction
+        if iter == 0
+            d = -Fx
+        else
+            y = Fx - F_km1
+            s = x - x_km1
+            f_k = merit(x,F)
+            f_km1 = merit(x_km1,F)
+            zeta = 2.0*(f_km1 - f_k)+dot(s,F_km1 + Fx)
+            mu = s
+            w = y + xi * max(zeta,0.0) / dot(d,mu) * mu
+            stw = dot(s,w)
+            t = m_star * norm(w,2)^2 / stw - n_star * stw / norm(s,2)
+            dtw = dot(d,w)
+            d = -Fx + dot(w-t*s,Fx) / dtw * d
+        end
+
+        # Linesearch
+        alpha = linesearch(x,d,F)
+
+        z = x + alpha * d
+
+        F_z = F(z)
+        norm_F_z = norm(F_z,2)
+
+        if norm_F_z < epsilon
+            return z,2
+        end
+
+        x_km1 = x
+        
+        x = x - dot(F_z,x-z) / norm_F_z^2 * F_z
+
+        F_km1 = Fx
+
+        iter += 1
+        if iter > maxiter
+            return x,1
+        end
+        
+    end
+
 end
 
+# Linesearch
+function linesearch(x,d,F)
+
+    m = 0
+    snorm_d2 = sigma * norm(d,2)^2
+    while true
+        alpha = beta^m
+        q = x + alpha * d
+        F_q = F(q)
+        stptest = dot(F_q,d) + alpha * snorm_d2 > 0.0
+        if ~stptest
+            return alpha
+        end
+        m += 1
+    end
+
+
+end
+
+function merit(x,F)
+
+    return 0.5 * norm(F(x))^2
+
+end
