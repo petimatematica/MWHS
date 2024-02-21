@@ -28,11 +28,14 @@ function algorithm1(F, x0)
             f_km1 = merit(x_km1,F)
             zeta = 2.0*(f_km1 - f_k)+dot(s,F_km1 + Fx)
             mu = s
-            w = y + xi * max(zeta,0.0) / dot(d,mu) * mu
+            w = y + xi * max(zeta,0.0) / dot(s,mu) * mu
             stw = dot(s,w)
-            t = m_star * norm(w,2)^2 / stw - n_star * stw / norm(s,2)
+            t = m_star * norm(w,2)^2 / stw - n_star * stw / norm(s,2)^2
             dtw = dot(d,w)
             d = -Fx + dot(w-t*s,Fx) / dtw * d
+            if norm(d,2) < epsilon
+                return x,3
+            end
         end
 
         # Linesearch
@@ -49,7 +52,7 @@ function algorithm1(F, x0)
 
         x_km1 = x
         
-        x = x - dot(F_z,x-z) / norm_F_z^2 * F_z
+        x = x - (dot(F_z,x-z) / norm_F_z^2) * F_z
 
         F_km1 = Fx
 

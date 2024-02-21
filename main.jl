@@ -1,6 +1,6 @@
 #
 #
-using LinearAlgebra, DataFrames, Random, Printf, BenchmarkProfiles
+using LinearAlgebra,Random, Printf
 
 include("new_MCGP.jl")
 include("testfunctions.jl")
@@ -33,7 +33,7 @@ function PontosIniciais(n)
     return x1, x2, x3, x4, x5, x6, x7, x8
 end
 
-x1, x2, x3, x4, x5, x6, x7, x8 = PontosIniciais(50)
+x1, x2, x3, x4, x5, x6, x7, x8 = PontosIniciais(10000)
 
 # Code parameters
 
