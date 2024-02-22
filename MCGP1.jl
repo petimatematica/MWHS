@@ -1,6 +1,4 @@
 #  O seguinte algoritmo é dado pelo artigo intitulado "A Scaled Dai–Yuan Projection-Based Conjugate Gradient Method for Solving Monotone Equations with Applications"  
-
-
 #####
 
 function algorithm1(F, x0)
