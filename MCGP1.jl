@@ -4,9 +4,9 @@
 function algorithm1(F, x0)
     iter = 0
     x = x0
-   F_km1 = NaN
-   x_km1 = NaN
-   d = NaN
+    F_km1 = NaN
+    x_km1 = NaN
+    d = NaN
     while true
         Fx = F(x)
         norm_Fx = norm(Fx,2)
@@ -24,16 +24,13 @@ function algorithm1(F, x0)
             s = x - x_km1
             f_k = merit(x,F)
             f_km1 = merit(x_km1,F)
-            zeta = 2.0*(f_km1 - f_k)+dot(s,F_km1 + Fx)
+            zeta = 2.0*(f_km1 - f_k) + dot(s,F_km1 + Fx)
             mu = s
-            w = y + xi * max(zeta,0.0) / dot(s,mu) * mu
+            w = y + xi * (max(zeta,0.0) / dot(s,mu)) * mu
             stw = dot(s,w)
-            t = m_star * norm(w,2)^2 / stw - n_star * stw / norm(s,2)^2
+            t1 = (1 + (m_star * norm(w,2)^2 / stw - n_star * stw / norm(s,2)^2))
             dtw = dot(d,w)
-            d = -Fx + dot(w-t*s,Fx) / dtw * d
-            if norm(d,2) < epsilon
-                return x,3
-            end
+            d = -Fx + (dot(w-t1*s,Fx) / dtw) * d    # dk
         end
 
         # Linesearch
@@ -50,7 +47,7 @@ function algorithm1(F, x0)
 
         x_km1 = x
         
-        x = x - (dot(F_z,x-z) / norm_F_z^2) * F_z
+        x = x - (dot(F_z,x-z) / (norm_F_z)^2) * F_z  #Projection 
 
         F_km1 = Fx
 
@@ -65,7 +62,7 @@ end
 
 # Linesearch
 function linesearch(x,d,F)
-
+    
     m = 0
     snorm_d2 = sigma * norm(d,2)^2
     while true

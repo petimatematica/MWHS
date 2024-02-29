@@ -2,7 +2,8 @@
 #
 using LinearAlgebra
 
-include("new_MCGP.jl")
+include("MCGP1.jl")
+include("MCGP2.jl")
 include("testfunctions.jl")
 # Dimension seting
 # n = 50
@@ -21,9 +22,9 @@ function PontosIniciais(n)
 
     for i in 1:n
         push!(x1,1)
-        push!(x2,i/n-2)
+        push!(x2,(i/n)-2)
         push!(x3,1/i)
-        push!(x4,i/n-1)
+        push!(x4,(i/n)-1)
         push!(x5,(-1)^i*0.25)
         push!(x6,i/n)
         push!(x7,i^(-1))
@@ -33,7 +34,7 @@ function PontosIniciais(n)
     return x1, x2, x3, x4, x5, x6, x7, x8
 end
 
-x1, x2, x3, x4, x5, x6, x7, x8 = PontosIniciais(500000)
+x1, x2, x3, x4, x5, x6, x7, x8 = PontosIniciais(10000)
 
 # Code parameters
 
@@ -44,14 +45,10 @@ beta = 0.6
 xi = 0.8
 m_star = 0.8
 n_star = -0.1
- sol = algorithm1(prob1, x1);
-# sol = algorithm1(prob8, x2);
-# sol = algorithm1(prob8, x3);
-# sol = algorithm1(prob8, x4);
-# sol = algorithm1(prob8, x5);
-# sol = algorithm1(prob8, x6);
-# sol = algorithm1(prob8, x7);
-# sol = algorithm1(prob8, x8);
+q_star = 0.8
+r_star = -0.5
+sol = algorithm2(prob12, x1);
+ #sol = algorithm1(prob8, x2);
 
 #println(sol)
 

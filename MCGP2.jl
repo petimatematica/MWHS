@@ -5,9 +5,9 @@
 function algorithm2(F, x0)
     iter = 0
     x = x0
-   F_km1 = NaN
-   x_km1 = NaN
-   d = NaN
+    F_km1 = NaN
+    x_km1 = NaN
+    d = NaN
     while true
         Fx = F(x)
         norm_Fx = norm(Fx,2)
@@ -29,9 +29,9 @@ function algorithm2(F, x0)
             mu = s
             w = y + xi * (max(zeta,0.0) / dot(s,mu)) * mu
             sty = dot(s,y)
-            t = q_star * norm(y,2)^2 / sty - r_star * sty / norm(s,2)^2
+            t2 = (1 + (q_star * norm(y,2)^2 / sty - r_star * sty / norm(s,2)^2))
             dtw = dot(d,w)
-            d = -Fx + (dot(w-t*s,Fx) / dtw) * d    # dk
+            d = -Fx + (dot(w-t2*s,Fx) / dtw) * d    # dk
         end
 
         # Linesearch
