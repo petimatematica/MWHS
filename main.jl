@@ -3,7 +3,7 @@
 using LinearAlgebra
 
 include("MCGP1.jl")
-include("MCGP2.jl")
+#include("MCGP2.jl")
 include("testfunctions.jl")
 # Dimension seting
 # n = 50
@@ -34,12 +34,12 @@ function PontosIniciais(n)
     return x1, x2, x3, x4, x5, x6, x7, x8
 end
 
-x1, x2, x3, x4, x5, x6, x7, x8 = PontosIniciais(10000)
+x1, x2, x3, x4, x5, x6, x7, x8 = PontosIniciais(100)
 
 # Code parameters
 
 maxiter = 1000
-epsilon = 1.e-10
+epsilon = 1.e-6
 sigma = 1.e-4
 beta = 0.6
 xi = 0.8

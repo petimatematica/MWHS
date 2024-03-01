@@ -67,6 +67,10 @@ function linesearch(x,d,F)
     snorm_d2 = sigma * norm(d,2)^2
     while true
         alpha = beta^m
+        if alpha < 1.e-5
+            return  1.e-5
+        end
+      #  println("alpha = $alpha")
         q = x + alpha * d
         F_q = F(q)
         stptest = dot(F_q,d) + alpha * snorm_d2 > 0.0
