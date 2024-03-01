@@ -47,7 +47,7 @@ m_star = 0.8
 n_star = -0.1
 q_star = 0.8
 r_star = -0.5
-sol = algorithm2(prob12, x1);
+sol = algorithm1(prob12, x4);
  #sol = algorithm1(prob8, x2);
 
 #println(sol)
