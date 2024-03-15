@@ -22,8 +22,8 @@ function algorithm1(F, x0)
         else
             y = Fx - F_km1
             s = x - x_km1
-            f_k = merit(x,F)
-            f_km1 = merit(x_km1,F)
+            f_k = merit1(x,F)
+            f_km1 = merit1(x_km1,F)
             zeta = 2.0*(f_km1 - f_k) + dot(s,F_km1 + Fx)
             mu = s
             w = y + xi * (max(zeta,0.0) / dot(s,mu)) * mu
@@ -34,7 +34,7 @@ function algorithm1(F, x0)
         end
 
         # Linesearch
-        alpha = linesearch(x,d,F)
+        alpha = linesearch1(x,d,F)
 
         z = x + alpha * d
 
@@ -61,7 +61,7 @@ function algorithm1(F, x0)
 end
 
 # Linesearch
-function linesearch(x,d,F)
+function linesearch1(x,d,F)
     
     m = 0
     snorm_d2 = sigma * norm(d,2)^2
@@ -83,7 +83,7 @@ function linesearch(x,d,F)
 
 end
 
-function merit(x,F)
+function merit1(x,F)
 
     return 0.5 * norm(F(x))^2
 

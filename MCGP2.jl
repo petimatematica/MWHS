@@ -23,8 +23,8 @@ function algorithm2(F, x0)
         else
             y = Fx - F_km1
             s = x - x_km1
-            f_k = merit(x,F)
-            f_km1 = merit(x_km1,F)
+            f_k = merit2(x,F)
+            f_km1 = merit2(x_km1,F)
             zeta = 2.0*(f_km1 - f_k)+dot(s,F_km1 + Fx)
             mu = s
             w = y + xi * (max(zeta,0.0) / dot(s,mu)) * mu
@@ -35,7 +35,7 @@ function algorithm2(F, x0)
         end
 
         # Linesearch
-        alpha = linesearch(x,d,F)
+        alpha = linesearch2(x,d,F)
 
         z = x + alpha * d
 
@@ -62,12 +62,16 @@ function algorithm2(F, x0)
 end
 
 # Linesearch
-function linesearch(x,d,F)
+function linesearch2(x,d,F)
 
     m = 0
     snorm_d2 = sigma * norm(d,2)^2
     while true
         alpha = beta^m
+        if alpha < 1.e-5
+            return  1.e-5
+        end
+        #println("alpha = $alpha")
         q = x + alpha * d
         F_q = F(q)
         stptest = dot(F_q,d) + alpha * snorm_d2 > 0.0
@@ -80,7 +84,7 @@ function linesearch(x,d,F)
 
 end
 
-function merit(x,F)
+function merit2(x,F)
 
     return 0.5 * norm(F(x))^2
 

@@ -34,12 +34,12 @@ function PontosIniciais(n)
     return x1, x2, x3, x4, x5, x6, x7, x8
 end
 
-x1, x2, x3, x4, x5, x6, x7, x8 = PontosIniciais(100)
+x1, x2, x3, x4, x5, x6, x7, x8 = PontosIniciais(1000)
 
 # Code parameters
 
 maxiter = 1000
-epsilon = 1.e-6
+epsilon = 1.e-10
 sigma = 1.e-4
 beta = 0.6
 xi = 0.8
@@ -47,7 +47,7 @@ m_star = 0.8
 n_star = -0.1
 q_star = 0.8
 r_star = -0.5
-sol = algorithm1(prob4, x1);
+sol = algorithm1(prob4, x8);
  #sol = algorithm1(prob8, x2);
 
 #println(sol)
