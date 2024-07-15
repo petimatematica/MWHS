@@ -37,8 +37,8 @@ function algorithm1(F, x0)
         else
             y = Fx - F_km1 # Difference of F(x) between iterations
             s = x - x_km1 # Step size
-            f_k = merit1(x,F)    # Compute merit function at current x
-            f_km1 = merit1(x_km1,F) # Compute merit function at previous x
+            f_k = merit1(Fx)    # Compute merit function at current x
+            f_km1 = merit1(F_km1) # Compute merit function at previous x
             zeta = 2.0*(f_km1 - f_k) + dot(s,F_km1 + Fx)  # Compute zeta
             mu = s
             w = y + xi * (max(zeta,0.0) / dot(s,mu)) * mu  # Compute w
@@ -113,8 +113,8 @@ function linesearch1(x,d,F)
 
 end
 
-function merit1(x,F)
+function merit1(F)
 
-    return 0.5 * norm(F(x))^2
+    return 0.5 * norm(F)^2
 
 end

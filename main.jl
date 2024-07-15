@@ -50,6 +50,6 @@ r_star = -0.5
 sol = algorithm1(prob1, x2);
  #sol = algorithm1(prob8, x2);
 
-#println(sol)
+ println("$(sol[3])   $(sol[4])")
 
 
