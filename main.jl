@@ -22,7 +22,7 @@ function PontosIniciais(n)
 
     for i in 1:n
         push!(x1,1)
-        push!(x2,(i/n)-2)
+        push!(x2,2-(i/n))
         push!(x3,1/i)
         push!(x4,(i/n)-1)
         push!(x5,(-1)^i*0.25)
@@ -47,8 +47,9 @@ m_star = 0.8
 n_star = -0.1
 q_star = 0.8
 r_star = -0.5
-sol = algorithm1(prob4, x8);
+sol = algorithm1(prob1, x2);
  #sol = algorithm1(prob8, x2);
 
 #println(sol)
+
 
