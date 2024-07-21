@@ -1,6 +1,4 @@
 
-####
-####
 # Objective function section   "of the article "Descent Perry conjugate gradient methodsfor systems of monotone nonlinear equations" 
 
 

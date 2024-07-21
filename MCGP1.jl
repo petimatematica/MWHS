@@ -8,13 +8,12 @@ function algorithm1(F, x0)
     iter = 0
     fn = 0
     x = x0
+    seqx = x
     F_km1 = NaN
     x_km1 = NaN
-    d = NaN
-    X, Y, Z = Float64[], Float64[], Float64[]
-    
+    d = NaN  
 
-     t = time()
+    t = time()
     # Infinite loop to iterate until convergence or max iterations
     while true
         Fx = F(x) # Compute F at x
@@ -23,12 +22,12 @@ function algorithm1(F, x0)
 
 
          # Print the current iteration and the norm of F(x)
-        println("iter $iter  norm_Fx $norm_Fx")
+        #println("iter $iter  norm_Fx $norm_Fx")
 
         # Check for convergence
         if norm_Fx < epsilon
              et = time() - t
-            return x,0,fn,et # Return current x and a success code
+            return x,0,fn,et, seqx # Return current x and a success code
         end
        
         # Descent direction
@@ -62,13 +61,14 @@ function algorithm1(F, x0)
         # Check for convergence 
         if norm_F_z < epsilon
              et = time()-t
-            return z,2,fn,et # Return new solution and a success code
+            return z,0,fn,et, seqx # Return new solution and a success code #Trocando o 2 por 0
         end
 
         # Update variables for the next iteration
         x_km1 = x
         
         x = x - (dot(F_z,x-z) / (norm_F_z)^2) * F_z  #Projection step 
+        seqx = [seqx x]
 
         F_km1 = Fx
 
@@ -77,11 +77,10 @@ function algorithm1(F, x0)
         # Check for maximum iterations
         if iter > maxiter
              et = time()- t
-            return x,1,fn,et # Return current x and a failure code
+            return x,1,fn,et, seqx # Return current x and a failure code
         end
         
     end
-
 end
 
 # Function to perform Linesearch
