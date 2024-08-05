@@ -1,6 +1,6 @@
 
 
-using LinearAlgebra, DataFrames, Plots, BenchmarkProfiles
+using LinearAlgebra, DataFrames, Plots, BenchmarkProfiles,JLD2, Printf
 
 include("MCGP1.jl")
 include("MCGP2.jl")
@@ -47,8 +47,7 @@ pontos_iniciais = Float64[]
 
 dim= [500]
 estrategias= ["MCGP1", "MCGP2"]
-func=[prob2, prob3, prob4, prob5, prob5, prob6, prob7, prob8, prob9, prob10, prob11, prob12]
-#, prob4, prob5, prob5, prob6, prob7, prob8, prob9, prob10, prob11, prob12
+func=[prob2, prob3, prob4, prob5, prob6, prob7, prob8, prob9, prob10, prob11, prob12]
 times1 = Float64[]
 times2 = Float64[]
 iter1 = Float64[]
@@ -57,6 +56,7 @@ aval1 = Float64[]
 aval2 = Float64[]
 
 t_inicial = time()
+
 
 for F in func
     for dimension in dim
@@ -98,10 +98,15 @@ for F in func
                         push!(aval2, fn)  
                     end
                 end
-            end 
+                filename = @sprintf("echo/%s_dim%d_ponto_inicial%.2f_%s_ierror%d.jld2", F, dimension, x0[1], estrategia, ierror)
+                @save filename x ierror fn et seqx
+            end   
         end 
     end
 end
+
+
+
 t_final= time() - t_inicial
 problems= length(pontos_iniciais)* length(dim)* length(pontos_iniciais)* length(func)
 println("Número de problemas=", problems) 

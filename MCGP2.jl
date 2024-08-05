@@ -13,7 +13,7 @@ function algorithm2(F, x0)
     F_km1 = NaN
     x_km1 = NaN
     d = NaN
-    X, Y, Z = Float64[], Float64[], Float64[]
+  
 
     t = time()
 

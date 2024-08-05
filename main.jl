@@ -1,12 +1,11 @@
 
-using LinearAlgebra
+using LinearAlgebra, DataFrames
 
 include("MCGP1.jl")
 include("MCGP2.jl")
 include("testfunctions.jl")
 # Dimension seting
 # n = 50
-
 # initial guess
 function PontosIniciais(n)
 
@@ -46,8 +45,9 @@ m_star = 0.8
 n_star = -0.1
 q_star = 0.8
 r_star = -0.5
-sol = algorithm2(prob1, x2);
- 
-println("$(sol[3])   $(sol[4])")
+sol= algorithm1(prob1, x2);
+
+
+# println("$(sol[3])   $(sol[4])")
 
 

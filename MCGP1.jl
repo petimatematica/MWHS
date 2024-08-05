@@ -1,7 +1,7 @@
 # The presented algorithm is made using the article titled "Descent Perry conjugate gradient methods for systems of monotone nonlinear equations". Such an algorithm is done using the first given descent direction. 
 
 
-
+using DataFrames
 # Function to execute the main algorithm
 function algorithm1(F, x0)
     # Initialize variables
@@ -13,6 +13,15 @@ function algorithm1(F, x0)
     x_km1 = NaN
     d = NaN  
 
+    # fn = Float64[]
+    # et = Float64[]
+    # iter = Float64[]
+    # seqx = Float64[]
+    # norm=Float64[]
+
+
+
+
     t = time()
     # Infinite loop to iterate until convergence or max iterations
     while true
@@ -21,8 +30,8 @@ function algorithm1(F, x0)
         norm_Fx = norm(Fx,2)  # Compute the 2-norm of F(x)
 
 
-         # Print the current iteration and the norm of F(x)
-        #println("iter $iter  norm_Fx $norm_Fx")
+            # Print the current iteration and the norm of F(x)
+            #println("iter $iter  norm_Fx $norm_Fx")
 
         # Check for convergence
         if norm_Fx < epsilon
@@ -81,6 +90,8 @@ function algorithm1(F, x0)
         end
         
     end
+
+  # info = DataFrame(Iter= iter, norma=norm, Aval= fn, Time=et, seqx=seqx) 
 end
 
 # Function to perform Linesearch
