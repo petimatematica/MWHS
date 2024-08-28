@@ -8,7 +8,7 @@ include("testfunctions.jl")
 
 #Parâmetros
 
-maxiter = 10000
+maxiter = 50000
 epsilon = 1.e-6
 sigma = 1.e-4
 beta = 0.6
@@ -133,8 +133,8 @@ palette = colors, linewidth = 2, dpi = 1000)
 
 println("Performance profiles generated, saving figures...")
 
-savefig(P1, "Time_teste_500.png")
-savefig(P2, "Aval_500.png")
-savefig(P3, "iter_500.png")
+savefig(P1, "Time_teste_500novo.png")
+savefig(P2, "Aval_500novo.png")
+savefig(P3, "iter_500novo.png")
 
 println("Figures saved, the code has finished running.")

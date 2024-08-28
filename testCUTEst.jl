@@ -2,13 +2,11 @@
 
 ### 
 
-using CUTEst, NLPModels, LinearAlgebra, DataFrames, Random, Printf, Plots, BenchmarkProfiles, JLD2
+using CUTEst, NLPModels, LinearAlgebra, DataFrames, Random, Printf
 include("MCGP1.jl")
 include("MCGP2.jl")
 # Defina uma matriz de nomes de problemas CUTEst
 problems = ["PALMER5D"]
-#[HILBERTA, "ZANGWIL2", "DIXON3DQ", "TRIDIA", "DQDRTIC", "HILBERTB", "TESTQUAD"] 
-#["PALMER1C", "PALMER2C", "PALMER8C", "PALMER1D", "PALMER5C", "PALMER7C", "PALMER3C", "PALMER4C"]
 dimension = ["2"]
 
 for i in 1:length(problems)
