@@ -70,7 +70,7 @@ function algorithm1(F, x0)
         # Check for convergence 
         if norm_F_z < epsilon
              et = time()-t
-            return z,0,fn,et, seqx # Return new solution and a success code #Trocando o 2 por 0
+            return z,2,fn,et, seqx # Return new solution and a success code #Trocando o 2 por 0
         end
 
         # Update variables for the next iteration

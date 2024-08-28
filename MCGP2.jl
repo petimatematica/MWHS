@@ -100,8 +100,8 @@ function linesearch2(x,d,F)
     # Infinite loop to find the suitable step size alpha
     while true
         alpha = beta^m #Compute alpha
-        if alpha < 1.e-5
-            return  1.e-5, fn_linesearch # Return minimum alpha if below threshold
+        if alpha < 1.e-6
+            return  1.e-6, fn_linesearch # Return minimum alpha if below threshold
         end
 
         #println("alpha = $alpha")
